@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Bolani Watches</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+        body {
+            background-color: #f6f5f2; /* Warm Beige Background */
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #3e4656;
+        }
+
+        .font-heading {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Custom Scrollbar for Thumbnails */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- TOP BAR: Navigation -->
+    <header class="w-full bg-[#f6f5f2] border-b border-[#999a90]/20 sticky top-0 z-50 backdrop-blur-md bg-opacity-90">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+            <!-- Text Logo -->
+            <a href="index.html" class="group flex flex-col">
+                <span class="font-heading text-xl sm:text-2xl font-bold tracking-wider text-[#1d2b3a]">
+                    BOLANI WATCHES
+                </span>
+            </a>
+
+            <!-- Back Button -->
+            <button onclick="history.back()" class="text-xs sm:text-sm font-semibold text-[#1d2b3a] hover:underline flex items-center gap-1">
+                <i class="fa-solid fa-arrow-left"></i> Go Back
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN PRODUCT DETAIL & ORDER SECTION -->
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 py-6 w-full flex-1">
+        
+        <!-- Loading State -->
+        <div id="loadingState" class="text-center py-20">
+            <i class="fa-solid fa-circle-notch fa-spin text-4xl text-[#1d2b3a]"></i>
+            <p class="mt-3 text-sm font-semibold text-[#6b7280]">Loading Product Details...</p>
+        </div>
+
+        <!-- Main Grid Container (Desktop: 2 Columns | Mobile: Stacked) -->
+        <div id="productContainer" class="hidden grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-start">
+            
+            <!-- LEFT COLUMN: Image Gallery Carousel -->
+            <div class="bg-white p-3 sm:p-5 rounded-2xl border border-[#999a90]/25 shadow-sm">
+                
+                <!-- Main Image View (Amazon Style Slider) -->
+                <div class="relative w-full h-72 sm:h-96 bg-[#f6f5f2] rounded-xl overflow-hidden flex items-center justify-center p-2">
+                    <img id="mainImage" src="" alt="Product Image" class="max-h-full max-w-full object-contain transition-all duration-300">
+                    
+                    <!-- Prev / Next Navigation Arrows -->
+                    <button id="prevBtn" onclick="prevImage()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#1d2b3a] w-8 h-8 rounded-full shadow-md flex items-center justify-center transition-all">
+                        <i class="fa-solid fa-chevron-left text-xs"></i>
+                    </button>
+                    <button id="nextBtn" onclick="nextImage()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#1d2b3a] w-8 h-8 rounded-full shadow-md flex items-center justify-center transition-all">
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+
+                    <!-- Image Index Badge -->
+                    <span id="imageCounter" class="absolute bottom-2 right-2 bg-[#1d2b3a]/80 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">
+                        1 / 1
+                    </span>
+                </div>
+
+                <!-- Thumbnails Strip (Clickable) -->
+                <div id="thumbnailStrip" class="flex gap-2 mt-3 overflow-x-auto no-scrollbar pb-1">
+                    <!-- Thumbnails will be populated dynamically -->
+                </div>
+
+                <!-- Short Product Description (Mobile View Optimized) -->
+                <div class="mt-4 pt-4 border-t border-[#999a90]/20">
+                    <h3 class="font-bold text-[#1d2b3a] text-sm sm:text-base">Description:</h3>
+                    <p id="productDescription" class="text-xs sm:text-sm text-[#6b7280] mt-1 leading-relaxed">
+                        <!-- Description populated dynamically -->
+                    </p>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Product Info & Order Form -->
+            <div class="bg-white p-4 sm:p-6 rounded-2xl border border-[#999a90]/25 shadow-sm">
+                
+                <!-- Product Title & Price -->
+                <div class="border-b border-[#999a90]/20 pb-4">
+                    <span id="productBadge" class="bg-[#8c7a5b] text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                        In Stock
+                    </span>
+                    <h1 id="productTitle" class="font-heading text-xl sm:text-2xl font-bold text-[#1d2b3a] mt-2">
+                        <!-- Title -->
+                    </h1>
+                    
+                    <div class="flex items-center gap-3 mt-2">
+                        <span id="productPrice" class="text-2xl sm:text-3xl font-extrabold text-[#1d2b3a]">
+                            Rs. 0
+                        </span>
+                        <span id="discountTag" class="hidden bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-md">
+                            Bulk Discount Available!
+                        </span>
+                    </div>
+                </div>
+
+                <!-- EASY ORDER FORM -->
+                <form id="orderForm" onsubmit="handleOrderSubmit(event)" class="mt-4 space-y-4">
+                    
+                    <h2 class="font-bold text-[#1d2b3a] text-sm sm:text-base flex items-center gap-2">
+                        <i class="fa-solid fa-[#1d2b3a] fa-cart-shopping text-[#8c7a5b]"></i> Quick Order Form
+                    </h2>
+
+                    <!-- 1. Customer Name -->
+                    <div>
+                        <label class="block text-xs font-bold text-[#3e4656] mb-1">Your Full Name *</label>
+                        <input type="text" id="custName" required placeholder="Aapka Naam" class="w-full bg-[#f6f5f2] border border-[#999a90]/30 rounded-xl px-3 py-2 text-xs sm:text-sm text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a]">
+                    </div>
+
+                    <!-- 2. Location / Address -->
+                    <div>
+                        <label class="block text-xs font-bold text-[#3e4656] mb-1">Complete Address / City *</label>
+                        <input type="text" id="custAddress" required placeholder="Ghar ka address aur shehar ka naam" class="w-full bg-[#f6f5f2] border border-[#999a90]/30 rounded-xl px-3 py-2 text-xs sm:text-sm text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a]">
+                    </div>
+
+                    <!-- 3. Phone Number -->
+                    <div>
+                        <label class="block text-xs font-bold text-[#3e4656] mb-1">Phone Number (WhatsApp) *</label>
+                        <input type="tel" id="custPhone" required placeholder="03xx-xxxxxxx" class="w-full bg-[#f6f5f2] border border-[#999a90]/30 rounded-xl px-3 py-2 text-xs sm:text-sm text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a]">
+                    </div>
+
+                    <!-- 4. Dynamic Color Option (Only shows if added in Admin Panel) -->
+                    <div id="colorSelectionSection" class="hidden">
+                        <label class="block text-xs font-bold text-[#3e4656] mb-1">Select Color Choice *</label>
+                        <select id="colorSelect" class="w-full bg-[#f6f5f2] border border-[#999a90]/30 rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a]">
+                            <!-- Options added dynamically -->
+                        </select>
+                    </div>
+
+                    <!-- 5. Choose Specific Image Variation -->
+                    <div>
+                        <label class="block text-xs font-bold text-[#3e4656] mb-1">Which Image Variant Do You Prefer? *</label>
+                        <select id="imageVariantSelect" class="w-full bg-[#f6f5f2] border border-[#999a90]/30 rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a]">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+
+                    <!-- 6. Quantity Selector & Discount Calculator -->
+                    <div class="grid grid-cols-2 gap-3 items-center bg-[#f6f5f2] p-3 rounded-xl border border-[#999a90]/20">
+                        <div>
+                            <label class="block text-xs font-bold text-[#3e4656] mb-1">Quantity:</label>
+                            <div class="flex items-center gap-2">
+                                <button type="button" onclick="changeQty(-1)" class="w-8 h-8 bg-white border border-[#999a90]/30 rounded-lg font-bold text-[#1d2b3a] hover:bg-[#1d2b3a] hover:text-white transition-colors">-</button>
+                                <span id="qtyDisplay" class="font-bold text-sm text-[#1d2b3a] w-6 text-center">1</span>
+                                <button type="button" onclick="changeQty(1)" class="w-8 h-8 bg-white border border-[#999a90]/30 rounded-lg font-bold text-[#1d2b3a] hover:bg-[#1d2b3a] hover:text-white transition-colors">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Total Calculated Price -->
+                        <div class="text-right">
+                            <span class="text-[10px] text-[#6b7280] block font-semibold">Total Payable:</span>
+                            <span id="totalPriceDisplay" class="text-lg font-extrabold text-[#1d2b3a]">Rs. 0</span>
+                            <span id="discountText" class="text-[9px] text-green-600 block font-bold"></span>
+                        </div>
+                    </div>
+
+                    <!-- ORDER NOW BUTTON (Direct WhatsApp Redirect) -->
+                    <button type="submit" class="w-full bg-[#25D366] hover:bg-[#1ebd59] text-white py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition-colors shadow-md flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Order Now via WhatsApp</span>
+                    </button>
+
+                    <p class="text-[10px] text-center text-[#6b7280]">
+                        <i class="fa-solid fa-shield-halved"></i> Safe & Fast Cash on Delivery Order
+                    </p>
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-[#3e4656] text-white text-center py-4 text-xs sm:text-sm mt-8">
+        <p>Web Created By <span class="font-bold text-[#f6f5f2]">@Amin Bolani</span></p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Store phone number for WhatsApp Chat
+        const OWNER_WHATSAPP = "923000000000"; // Replace with your WhatsApp Number
+
+        let currentProduct = null;
+        let activeImageIndex = 0;
+        let selectedQuantity = 1;
+
+        // 1. Fetch Product ID from URL Params & Load Data
+        async function loadProductDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            if (!productId) {
+                alert("Product reference missing!");
+                window.location.href = "index.html";
+                return;
+            }
+
+            try {
+                // Fetch product from backend API
+                const response = await fetch(`http://localhost:5000/api/products/${productId}`);
+                if (!response.ok) throw new Error("API Failed");
+                currentProduct = await response.json();
+            } catch (error) {
+                console.log("Loading fallback mock product data:", error);
+                
+                // Fallback Mock Data for testing
+                currentProduct = {
+                    _id: productId,
+                    title: "Imperium Luxury Gold Edition",
+                    price: 8500,
+                    description: "High-quality luxury timepiece crafted with water-resistant stainless steel dial, quartz movement, and premium finish.",
+                    colors: ["Golden", "Silver", "Black Matte"], // Admin added colors
+                    images: [
+                        "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600",
+                        "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600",
+                        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600"
+                    ]
+                };
+            }
+
+            renderProductDetails();
+        }
+
+        // 2. Render Details & Form Options
+        function renderProductDetails() {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('productContainer').classList.remove('hidden');
+
+            // Set Title, Price, Description
+            document.getElementById('productTitle').innerText = currentProduct.title;
+            document.getElementById('productPrice').innerText = `Rs. ${currentProduct.price.toLocaleString()}`;
+            document.getElementById('productDescription').innerText = currentProduct.description || "No description provided.";
+
+            // Render Images Carousel & Thumbnails
+            updateCarouselImage();
+            renderThumbnails();
+            populateImageVariantDropdown();
+
+            // Render Colors Option if present
+            const colorSection = document.getElementById('colorSelectionSection');
+            const colorSelect = document.getElementById('colorSelect');
+            
+            if (currentProduct.colors && currentProduct.colors.length > 0) {
+                colorSection.classList.remove('hidden');
+                colorSelect.innerHTML = currentProduct.colors.map(c => `<option value="${c}">${c}</option>`).join('');
+            } else {
+                colorSection.classList.add('hidden');
+            }
+
+            // Calculate Initial Total
+            calculateTotal();
+        }
+
+        // 3. Carousel Image Controls
+        function updateCarouselImage() {
+            const images = currentProduct.images && currentProduct.images.length > 0 
+                ? currentProduct.images 
+                : ['images/placeholder.jpg'];
+
+            document.getElementById('mainImage').src = images[activeImageIndex];
+            document.getElementById('imageCounter').innerText = `${activeImageIndex + 1} / ${images.length}`;
+            
+            // Highlight thumbnail
+            document.querySelectorAll('.thumb-btn').forEach((thumb, idx) => {
+                if (idx === activeImageIndex) {
+                    thumb.classList.add('border-[#1d2b3a]', 'ring-2', 'ring-[#1d2b3a]');
+                } else {
+                    thumb.classList.remove('border-[#1d2b3a]', 'ring-2', 'ring-[#1d2b3a]');
+                }
+            });
+        }
+
+        function nextImage() {
+            const images = currentProduct.images || [];
+            if (images.length === 0) return;
+            activeImageIndex = (activeImageIndex + 1) % images.length;
+            updateCarouselImage();
+        }
+
+        function prevImage() {
+            const images = currentProduct.images || [];
+            if (images.length === 0) return;
+            activeImageIndex = (activeImageIndex - 1 + images.length) % images.length;
+            updateCarouselImage();
+        }
+
+        function renderThumbnails() {
+            const strip = document.getElementById('thumbnailStrip');
+            const images = currentProduct.images || [];
+
+            if (images.length <= 1) {
+                strip.classList.add('hidden');
+                return;
+            }
+
+            strip.innerHTML = images.map((img, idx) => `
+                <button type="button" onclick="selectImage(${idx})" class="thumb-btn w-14 h-14 rounded-lg bg-[#f6f5f2] border border-[#999a90]/30 p-1 flex-shrink-0 overflow-hidden transition-all">
+                    <img src="${img}" class="w-full h-full object-contain">
+                </button>
+            `).join('');
+        }
+
+        function selectImage(idx) {
+            activeImageIndex = idx;
+            updateCarouselImage();
+            document.getElementById('imageVariantSelect').value = `Image Variant ${idx + 1}`;
+        }
+
+        function populateImageVariantDropdown() {
+            const variantSelect = document.getElementById('imageVariantSelect');
+            const images = currentProduct.images || [1];
+
+            variantSelect.innerHTML = images.map((_, idx) => `
+                <option value="Image Variant ${idx + 1}">Image Variant #${idx + 1}</option>
+            `).join('');
+        }
+
+        // 4. Quantity & Discount Calculation
+        function changeQty(change) {
+            selectedQuantity = Math.max(1, selectedQuantity + change);
+            document.getElementById('qtyDisplay').innerText = selectedQuantity;
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            let unitPrice = currentProduct.price;
+            let discountPercent = 0;
+
+            // Discount logic: 2 watches = 5% off, 3+ watches = 10% off
+            if (selectedQuantity === 2) {
+                discountPercent = 5;
+            } else if (selectedQuantity >= 3) {
+                discountPercent = 10;
+            }
+
+            let subtotal = unitPrice * selectedQuantity;
+            let discountAmount = (subtotal * discountPercent) / 100;
+            let finalTotal = subtotal - discountAmount;
+
+            document.getElementById('totalPriceDisplay').innerText = `Rs. ${finalTotal.toLocaleString()}`;
+            
+            const discTag = document.getElementById('discountTag');
+            const discText = document.getElementById('discountText');
+
+            if (discountPercent > 0) {
+                discTag.classList.remove('hidden');
+                discText.innerText = `${discountPercent}% Discount Applied (-Rs. ${discountAmount.toLocaleString()})`;
+            } else {
+                discTag.classList.add('hidden');
+                discText.innerText = "";
+            }
+        }
+
+        // 5. Submit Form & Open WhatsApp Chat Box with Details
+        function handleOrderSubmit(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('custName').value;
+            const address = document.getElementById('custAddress').value;
+            const phone = document.getElementById('custPhone').value;
+            
+            const colorSelect = document.getElementById('colorSelect');
+            const selectedColor = (colorSelect && !document.getElementById('colorSelectionSection').classList.contains('hidden')) 
+                ? colorSelect.value 
+                : "Standard";
+
+            const selectedImgVariant = document.getElementById('imageVariantSelect').value;
+            const totalPrice = document.getElementById('totalPriceDisplay').innerText;
+            const selectedImgUrl = currentProduct.images[activeImageIndex] || "N/A";
+
+            // Format WhatsApp Message
+            const message = `🛍️ *NEW WATCH ORDER - BOLANI WATCHES* 🛍️\n\n` +
+                `*Product:* ${currentProduct.title}\n` +
+                `*Selected Color:* ${selectedColor}\n` +
+                `*Selected Variant:* ${selectedImgVariant}\n` +
+                `*Quantity:* ${selectedQuantity}\n` +
+                `*Total Price:* ${totalPrice}\n\n` +
+                `👤 *Customer Details:*\n` +
+                `• *Name:* ${name}\n` +
+                `• *Phone:* ${phone}\n` +
+                `• *Address:* ${address}\n\n` +
+                `🖼️ *Image Link:* ${selectedImgUrl}\n\n` +
+                `Please confirm my order!`;
+
+            // Redirect to WhatsApp Chat
+            const whatsappUrl = `https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Initialize Page
+        document.addEventListener('DOMContentLoaded', loadProductDetail);
+    </script>
+</body>
+</html>

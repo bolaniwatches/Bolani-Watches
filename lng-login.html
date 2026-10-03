@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - Bolani Watches</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+        body {
+            background-color: #f6f5f2; /* Warm Beige Background */
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #3e4656;
+        }
+
+        .font-heading {
+            font-family: 'Cinzel', serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- LOGIN CARD CONTAINER -->
+    <div class="w-full max-w-md bg-white rounded-2xl border border-[#999a90]/25 shadow-xl p-6 sm:p-8">
+        
+        <!-- Header Branding -->
+        <div class="text-center mb-8">
+            <h1 class="font-heading text-2xl sm:text-3xl font-bold tracking-wider text-[#1d2b3a]">
+                BOLANI WATCHES
+            </h1>
+            <p class="text-xs uppercase tracking-[0.2em] text-[#8c7a5b] font-semibold mt-1">
+                Admin Control Panel
+            </p>
+        </div>
+
+        <!-- Alert Notification Box -->
+        <div id="alertBox" class="hidden mb-4 p-3 rounded-xl text-xs font-semibold flex items-center gap-2"></div>
+
+        <!-- LOGIN FORM -->
+        <form id="adminLoginForm" onsubmit="handleAdminLogin(event)" class="space-y-5">
+            
+            <!-- Username Input -->
+            <div>
+                <label class="block text-xs font-bold text-[#3e4656] mb-1">Username</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-[#6b7280]">
+                        <i class="fa-solid fa-user text-xs"></i>
+                    </span>
+                    <input type="text" id="adminUsername" required placeholder="Enter username" class="w-full pl-9 pr-3 py-2.5 bg-[#f6f5f2] border border-[#999a90]/30 rounded-xl text-xs sm:text-sm font-semibold text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a] transition-all">
+                </div>
+            </div>
+
+            <!-- Password Input with Show/Hide Toggle -->
+            <div>
+                <label class="block text-xs font-bold text-[#3e4656] mb-1">Password</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-[#6b7280]">
+                        <i class="fa-solid fa-lock text-xs"></i>
+                    </span>
+                    <input type="password" id="adminPassword" required placeholder="Enter password" class="w-full pl-9 pr-10 py-2.5 bg-[#f6f5f2] border border-[#999a90]/30 rounded-xl text-xs sm:text-sm font-semibold text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a] transition-all">
+                    
+                    <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 flex items-center pr-3 text-[#6b7280] hover:text-[#1d2b3a]">
+                        <i id="eyeIcon" class="fa-solid fa-eye text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" id="loginBtn" class="w-full bg-[#1d2b3a] hover:bg-[#8c7a5b] text-white py-3 rounded-xl font-bold text-xs sm:text-sm transition-colors shadow-md flex items-center justify-center gap-2">
+                <span id="btnText">Secure Login</span>
+                <i id="btnSpinner" class="fa-solid fa-circle-notch fa-spin text-xs hidden"></i>
+            </button>
+        </form>
+
+        <div class="mt-6 text-center border-t border-[#999a90]/20 pt-4">
+            <p class="text-[10px] text-[#6b7280]">
+                Protected Admin Gateway | Developed by <span class="font-bold text-[#1d2b3a]">@Amin Bolani</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Password Visibility Toggle
+        function togglePasswordVisibility() {
+            const pwdInput = document.getElementById('adminPassword');
+            const eyeIcon = document.getElementById('eyeIcon');
+
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                pwdInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Show Alert Box
+        function showAlert(message, isSuccess = false) {
+            const alertBox = document.getElementById('alertBox');
+            alertBox.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
+            
+            if (isSuccess) {
+                alertBox.classList.add('bg-green-100', 'text-green-700');
+                alertBox.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>${message}</span>`;
+            } else {
+                alertBox.classList.add('bg-red-100', 'text-red-700');
+                alertBox.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <span>${message}</span>`;
+            }
+        }
+
+        // Handle Form Submit
+        async function handleAdminLogin(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('adminUsername').value.trim();
+            const password = document.getElementById('adminPassword').value.trim();
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+            const loginBtn = document.getElementById('loginBtn');
+
+            // UI Loading State
+            btnText.innerText = "Authenticating...";
+            btnSpinner.classList.remove('hidden');
+            loginBtn.disabled = true;
+
+            try {
+                // Call Node.js Backend Login Endpoint
+                const response = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showAlert("Login Successful! Redirecting...", true);
+                    
+                    // Auth token save karein local storage mein (Security session management ke liye)
+                    localStorage.setItem('adminToken', data.token);
+
+                    setTimeout(() => {
+                        window.location.href = 'lnd-dashboad.html';
+                    }, 1000);
+                } else {
+                    showAlert(data.message || "Invalid Username or Password!");
+                }
+            } catch (error) {
+                console.error("Login Error:", error);
+                showAlert("Server connection failed. Please try again.");
+            } finally {
+                btnText.innerText = "Secure Login";
+                btnSpinner.classList.add('hidden');
+                loginBtn.disabled = false;
+            }
+        }
+
+        // Auto-check if already logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('adminToken');
+            if (token) {
+                // Verify Token status with backend
+                fetch('/api/admin/verify', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.valid) {
+                        window.location.href = 'lnd-dashboad.html';
+                    }
+                })
+                .catch(() => localStorage.removeItem('adminToken'));
+            }
+        });
+    </script>
+</body>
+</html>

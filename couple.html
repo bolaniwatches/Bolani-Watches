@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Couple Watches Collection - Bolani Watches</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Theme Colors & Floating Animations -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+        body {
+            background-color: #f6f5f2; /* Warm Beige Background */
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #3e4656;
+        }
+
+        .font-heading {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Continuous Floating Animation for Category PNGs */
+        @keyframes floatEffect {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .float-img {
+            animation: floatEffect 3.5s ease-in-out infinite;
+        }
+
+        .float-delay-1 { animation-delay: 0.5s; }
+        .float-delay-2 { animation-delay: 1s; }
+        .float-delay-3 { animation-delay: 1.5s; }
+
+        /* Hide Scrollbar for Horizontal Filter on Mobile */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- TOP BAR: Text Logo & Navigation -->
+    <header class="w-full bg-[#f6f5f2] border-b border-[#999a90]/20 sticky top-0 z-50 backdrop-blur-md bg-opacity-90">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <!-- Text Base Logo (Clicking returns to home page) -->
+            <a href="index.html" class="group flex flex-col">
+                <span class="font-heading text-2xl sm:text-3xl font-bold tracking-wider text-[#1d2b3a] group-hover:text-[#8c7a5b] transition-colors">
+                    BOLANI WATCHES
+                </span>
+                <span class="text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-[#6b7280]">
+                    Luxury Timepieces
+                </span>
+            </a>
+
+            <!-- Navigation Link -->
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="text-xs sm:text-sm font-semibold text-[#1d2b3a] hover:underline flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-left"></i> Main Site
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 1: COUPLE CATEGORY FILTERS & SECONDARY FILTERS -->
+    <section class="w-full py-6 px-3 sm:px-6 max-w-7xl mx-auto">
+        
+        <div class="text-center mb-6">
+            <h1 class="font-heading text-2xl sm:text-4xl font-bold text-[#1d2b3a]">💑 Couple Watches Collection</h1>
+            <p class="text-xs sm:text-sm text-[#6b7280] mt-1">Select a category to explore matching couple timepieces</p>
+        </div>
+
+        <!-- 4 Visual Floating PNG Category Filters for Couples -->
+        <div class="flex justify-start md:justify-center items-center gap-3 sm:gap-6 overflow-x-auto no-scrollbar pb-4 pt-2">
+            
+            <!-- Category 1: ALL COUPLES -->
+            <button onclick="filterCoupleType('ALL')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#1d2b3a] ring-2 ring-[#1d2b3a] shadow-sm hover:shadow-md transition-all w-[85px] sm:w-[130px]" data-couple="ALL">
+                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
+                    <img src="https://pngimg.com/uploads/watches/watches_PNG101455.png" alt="All Couple Watches" class="w-full h-full object-contain float-img">
+                </div>
+                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a]">All Couples</span>
+            </button>
+
+            <!-- Category 2: 👑 PREMIUM COUPLE -->
+            <button onclick="filterCoupleType('PREMIUM')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#999a90]/30 shadow-sm hover:shadow-md transition-all w-[85px] sm:w-[130px]" data-couple="PREMIUM">
+                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
+                    <img src="https://pngimg.com/uploads/watches/watches_PNG9864.png" alt="Premium Couple Watches" class="w-full h-full object-contain float-img float-delay-1">
+                </div>
+                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a] text-center">👑 Premium</span>
+            </button>
+
+            <!-- Category 3: ❤️ CASUAL COUPLE -->
+            <button onclick="filterCoupleType('CASUAL')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#999a90]/30 shadow-sm hover:shadow-md transition-all w-[85px] sm:w-[130px]" data-couple="CASUAL">
+                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
+                    <img src="https://pngimg.com/uploads/watches/watches_PNG9859.png" alt="Casual Couple Watches" class="w-full h-full object-contain float-img float-delay-2">
+                </div>
+                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a] text-center">❤️ Casual</span>
+            </button>
+
+            <!-- Category 4: 🎁 GIFT SETS -->
+            <button onclick="filterCoupleType('GIFT')" class="category-btn flex-shrink-0 flex flex-col items-center bg-white p-2 sm:p-3 rounded-2xl border border-[#999a90]/30 shadow-sm hover:shadow-md transition-all w-[85px] sm:w-[130px]" data-couple="GIFT">
+                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center relative">
+                    <img src="https://pngimg.com/uploads/watches/watches_PNG101442.png" alt="Gift Sets" class="w-full h-full object-contain float-img float-delay-3">
+                </div>
+                <span class="text-[10px] sm:text-xs font-bold uppercase mt-2 text-[#1d2b3a] text-center">🎁 Gift Sets</span>
+            </button>
+        </div>
+
+        <!-- SECONDARY FILTER: Price Sorting & Range Selector -->
+        <div class="mt-4 bg-white p-3 sm:p-4 rounded-xl border border-[#999a90]/20 flex flex-wrap justify-between items-center gap-3">
+            
+            <!-- Type Indicator -->
+            <div class="text-xs sm:text-sm font-semibold text-[#1d2b3a]">
+                Active Filter: <span id="activeFilterLabel" class="text-[#8c7a5b] font-bold">ALL COUPLES</span>
+            </div>
+
+            <!-- Price Dropdown Filters -->
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+                <label for="priceSort" class="text-xs font-bold text-[#3e4656] whitespace-nowrap">Price Filter:</label>
+                <select id="priceSort" onchange="applyFilters()" class="w-full sm:w-auto bg-[#f6f5f2] border border-[#999a90]/30 rounded-lg px-3 py-1.5 text-xs sm:text-sm font-semibold text-[#1d2b3a] focus:outline-none focus:ring-2 focus:ring-[#1d2b3a]">
+                    <option value="ALL">All Prices (Rs. 3,000 - 25,000)</option>
+                    <option value="LOW_HIGH">Price: Low to High</option>
+                    <option value="HIGH_LOW">Price: High to Low</option>
+                    <option value="UNDER_5000">Under Rs. 5,000</option>
+                    <option value="5000_12000">Rs. 5,000 - Rs. 12,000</option>
+                    <option value="ABOVE_12000">Above Rs. 12,000</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: PRODUCTS DYNAMIC GRID -->
+    <!-- Mobile: 3 cards horizontal per row | Desktop: 4 cards per row -->
+    <main class="w-full py-4 px-2 sm:px-6 max-w-7xl mx-auto flex-1">
+        
+        <!-- Products Container -->
+        <div id="productsGrid" class="grid grid-cols-3 md:grid-cols-4 gap-2 sm:gap-5">
+            <!-- Dynamic Cards will be rendered here via Backend API Script -->
+            <div class="col-span-3 md:col-span-4 text-center py-12">
+                <i class="fa-solid fa-spinner fa-spin text-3xl text-[#1d2b3a]"></i>
+                <p class="text-sm mt-2 text-[#6b7280]">Loading Couple Collection...</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-[#3e4656] text-white text-center py-4 text-xs sm:text-sm mt-8">
+        <p>Web Created By <span class="font-bold text-[#f6f5f2]">@Amin Bolani</span></p>
+    </footer>
+
+    <!-- JAVASCRIPT: Backend Dynamic Fetch & Frontend Filter Logic -->
+    <script>
+        // Global Variables for Couple Products
+        let allProducts = [];
+        let currentCoupleType = 'ALL';
+
+        // 1. Fetch Products from Backend Node.js / MongoDB Atlas API
+        async function fetchCoupleProducts() {
+            try {
+                // MongoDB API Endpoint for Couple Category
+                const response = await fetch('/api/products?category=couple');
+                
+                if (!response.ok) {
+                    throw new Error('API error');
+                }
+                
+                allProducts = await response.json();
+                applyFilters();
+
+            } catch (error) {
+                console.log('Using local fallback mock data for testing:', error);
+                
+                // Fallback Mock Data for Couple Collection
+                allProducts = [
+                    {
+                        _id: "c1",
+                        title: "Royal Gold Edition Pair",
+                        coupleType: "PREMIUM",
+                        price: 14500,
+                        images: ["https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500"]
+                    },
+                    {
+                        _id: "c2",
+                        title: "Classic Leather Duo Set",
+                        coupleType: "CASUAL",
+                        price: 4800,
+                        images: ["https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500"]
+                    },
+                    {
+                        _id: "c3",
+                        title: "Wedding Special Luxury Box",
+                        coupleType: "GIFT",
+                        price: 18500,
+                        images: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"]
+                    },
+                    {
+                        _id: "c4",
+                        title: "Minimal Silver Mesh Pair",
+                        coupleType: "CASUAL",
+                        price: 6200,
+                        images: ["https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=500"]
+                    },
+                    {
+                        _id: "c5",
+                        title: "Imperium Diamond Dial Couple",
+                        coupleType: "PREMIUM",
+                        price: 22000,
+                        images: ["https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500"]
+                    },
+                    {
+                        _id: "c6",
+                        title: "Anniversary Celebration Box",
+                        coupleType: "GIFT",
+                        price: 11500,
+                        images: ["https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=500"]
+                    }
+                ];
+
+                applyFilters();
+            }
+        }
+
+        // 2. Filter by Couple Category Icon Click
+        function filterCoupleType(type) {
+            currentCoupleType = type;
+            
+            // Update Active UI States
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                if (btn.getAttribute('data-couple') === type) {
+                    btn.classList.add('border-[#1d2b3a]', 'ring-2', 'ring-[#1d2b3a]', 'bg-white');
+                    btn.classList.remove('border-[#999a90]/30');
+                } else {
+                    btn.classList.remove('border-[#1d2b3a]', 'ring-2', 'ring-[#1d2b3a]');
+                    btn.classList.add('border-[#999a90]/30');
+                }
+            });
+
+            const labels = {
+                'ALL': 'ALL COUPLES',
+                'PREMIUM': '👑 PREMIUM COUPLE',
+                'CASUAL': '❤️ CASUAL COUPLE',
+                'GIFT': '🎁 GIFT SETS'
+            };
+
+            document.getElementById('activeFilterLabel').innerText = labels[type] || type;
+            applyFilters();
+        }
+
+        // 3. Combined Filtering (Type + Price) & Rendering
+        function applyFilters() {
+            let filtered = [...allProducts];
+
+            // Couple Type Filter
+            if (currentCoupleType !== 'ALL') {
+                filtered = filtered.filter(p => p.coupleType.toUpperCase() === currentCoupleType);
+            }
+
+            // Price Sorting / Filtering
+            const priceVal = document.getElementById('priceSort').value;
+            if (priceVal === 'LOW_HIGH') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (priceVal === 'HIGH_LOW') {
+                filtered.sort((a, b) => b.price - a.price);
+            } else if (priceVal === 'UNDER_5000') {
+                filtered = filtered.filter(p => p.price <= 5000);
+            } else if (priceVal === '5000_12000') {
+                filtered = filtered.filter(p => p.price >= 5000 && p.price <= 12000);
+            } else if (priceVal === 'ABOVE_12000') {
+                filtered = filtered.filter(p => p.price > 12000);
+            }
+
+            renderProducts(filtered);
+        }
+
+        // 4. Render Grid Cards (Mobile: 3 per row | Desktop: 4 per row)
+        function renderProducts(products) {
+            const grid = document.getElementById('productsGrid');
+
+            if (products.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-3 md:col-span-4 text-center py-12 bg-white rounded-2xl border border-[#999a90]/20">
+                        <i class="fa-solid fa-box-open text-4xl text-[#999a90] mb-2"></i>
+                        <p class="text-sm font-semibold text-[#1d2b3a]">Is category mein koi couple watch main milti nahi.</p>
+                        <p class="text-xs text-[#6b7280]">Dusri category ya price filter check karein.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = products.map(product => `
+                <div onclick="goToDetail('${product._id}')" class="cursor-pointer group bg-white rounded-xl sm:rounded-2xl border border-[#999a90]/25 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                    
+                    <!-- Product Image Container -->
+                    <div class="relative w-full h-28 sm:h-52 bg-[#f6f5f2] overflow-hidden flex items-center justify-center p-1 sm:p-3">
+                        <img src="${product.images && product.images.length > 0 ? product.images[0] : 'images/placeholder.jpg'}" 
+                             alt="${product.title}" 
+                             class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                             
+                        <span class="absolute top-1 left-1 sm:top-2 sm:left-2 bg-[#1d2b3a] text-white text-[8px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase">
+                            ${product.coupleType}
+                        </span>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="p-1.5 sm:p-4 flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="text-[10px] sm:text-base font-bold text-[#1d2b3a] line-clamp-1 group-hover:text-[#8c7a5b] transition-colors">
+                                ${product.title}
+                            </h3>
+                            <p class="text-[9px] sm:text-xs text-[#6b7280] hidden sm:block mt-0.5">
+                                Couple Matching Pair
+                            </p>
+                        </div>
+
+                        <div class="mt-1.5 sm:mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                            <span class="text-[11px] sm:text-lg font-bold text-[#1d2b3a]">
+                                Rs. ${product.price.toLocaleString()}
+                            </span>
+                            
+                            <button class="w-full sm:w-auto bg-[#1d2b3a] text-white text-[9px] sm:text-xs font-semibold py-1 px-2 rounded sm:rounded-lg group-hover:bg-[#8c7a5b] transition-colors flex items-center justify-center gap-1">
+                                <span>Details</span>
+                                <i class="fa-solid fa-chevron-right text-[7px] sm:text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 5. Navigate to Details Page
+        function goToDetail(productId) {
+            window.location.href = `product-detail.html?id=${productId}`;
+        }
+
+        // Initial Load Call
+        document.addEventListener('DOMContentLoaded', fetchCoupleProducts);
+    </script>
+</body>
+</html>
