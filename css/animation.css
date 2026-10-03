@@ -1,0 +1,73 @@
+/*--section1--*/
+
+/* ==========================================================================
+   BOLANI WATCHES - NAVBAR ANIMATIONS
+   ========================================================================== */
+
+/* 1. Mobile WhatsApp Icon Pulse Effect */
+@keyframes whatsappPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(37, 211, 102, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+.whatsapp-btn-mobile {
+    animation: whatsappPulse 2s infinite;
+}
+
+/* 2. Desktop Nav Link Underline Smooth Expand Animation */
+.nav-link::after {
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), width 0.4s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform-origin: left;
+}
+
+/* 3. Header Glassmorphism on Scroll */
+.main-header.scrolled {
+    height: 75px;
+    background-color: rgba(228, 221, 211, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(62, 70, 86, 0.08);
+}
+
+@media screen and (max-width: 402px) {
+    .main-header.scrolled {
+        height: 40px; /* Mobile par fixed dimensions barkarar rahengi */
+    }
+}
+
+
+/*section 3*/
+/* ==========================================================================
+   MOBILE SCROLL HINT ANIMATION
+   ========================================================================== */
+
+@keyframes mobileScrollHint {
+    0% {
+        transform: translateX(0);
+    }
+    30% {
+        transform: translateX(-28px);
+    }
+    60% {
+        transform: translateX(8px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.collections-grid-wrapper.animate-hint {
+    animation: mobileScrollHint 1.6s ease-in-out;
+}

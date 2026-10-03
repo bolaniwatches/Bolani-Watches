@@ -1,0 +1,323 @@
+/* ==========================================================================
+   FIXED RESPONSIVE NAVBAR (MOBILE & TABLET VIEW <= 768PX)
+   ========================================================================== */
+
+@media screen and (max-width: 768px) {
+    /* Header Container Height & Padding Fix */
+    .main-header {
+        height: 60px !important;
+        padding: 0 10px !important;
+    }
+
+    .header-container {
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        gap: 5px !important;
+    }
+
+    /* 1. Mobile Logo Fix */
+    .brand-logo {
+        flex-shrink: 0 !important;
+    }
+
+    .logo-text {
+        font-size: 0.95rem !important;
+        line-height: 1.1 !important;
+        white-space: nowrap !important;
+    }
+
+    /* 2. Compact Navigation Links Fix */
+    .nav-menu {
+        flex: 1 !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .nav-list {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-evenly !important;
+        gap: 6px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Social Links ko mobile par strictly hide karna */
+    .nav-desktop-only {
+        display: none !important;
+    }
+
+    .nav-link {
+        font-size: 0.7rem !important;
+        font-weight: 600 !important;
+        white-space: nowrap !important;
+        padding: 2px 0 !important;
+    }
+
+    /* 3. WhatsApp Button Switch Fix */
+    .whatsapp-btn-desktop {
+        display: none !important; /* Large button completely hide */
+    }
+
+    .whatsapp-btn-mobile {
+        display: flex !important; /* Circular badge show */
+        align-items: center !important;
+        justify-content: center !important;
+        width: 32px !important;
+        height: 32px !important;
+        background-color: #25D366 !important;
+        color: #ffffff !important;
+        border-radius: 50% !important;
+        font-size: 1rem !important;
+        flex-shrink: 0 !important;
+        text-decoration: none !important;
+    }
+}
+
+/*---section 2---*/
+/* ==========================================================================
+   HERO BANNER RESPONSIVE FIX (MOBILE VIEW)
+   ========================================================================== */
+
+@media screen and (max-width: 768px) {
+    .hero-banner-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        aspect-ratio: 402 / 165 !important; /* Scale perfectly to mobile banner proportions */
+        height: auto !important;
+    }
+}
+
+/* section 3*/
+
+/* ==========================================================================
+   SECTION 3: MOBILE CAROUSEL & HORIZONTAL SCROLL (FINAL FIXED)
+   ========================================================================== */
+
+@media screen and (max-width: 768px) {
+    .collections-section {
+        padding: var(--space-lg) var(--space-sm) !important;
+        width: 100% !important;
+    }
+
+    .section-container {
+        padding: 0 10px !important;
+        width: 100% !important;
+    }
+
+    .section-title {
+        font-size: 1.75rem !important;
+    }
+
+    .section-subtitle {
+        font-size: 0.85rem !important;
+    }
+
+    /* Grid ko Mobile Horizontal Carousel mein convert karne ke liye */
+    .collections-grid-wrapper {
+        width: 100% !important;
+        overflow-x: auto !important;
+        scroll-behavior: smooth !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding-bottom: 15px !important;
+        scrollbar-width: none !important; /* Firefox */
+    }
+
+    .collections-grid-wrapper::-webkit-scrollbar {
+        display: none !important; /* Chrome / Safari */
+    }
+
+    .collections-grid {
+        display: flex !important;
+        flex-direction: row !important;
+        grid-template-columns: none !important;
+        gap: 12px !important;
+        width: max-content !important;
+        scroll-snap-type: x mandatory !important;
+    }
+
+    /* 2 Full Cards + 3rd Card Half View Setting */
+    .collection-card {
+        width: 41vw !important;
+        min-width: 155px !important;
+        max-width: 175px !important;
+        scroll-snap-align: start !important;
+        flex-shrink: 0 !important;
+        border-radius: var(--radius-md) !important;
+    }
+
+    .card-content {
+        padding: 10px !important;
+    }
+
+    .card-tag {
+        font-size: 0.6rem !important;
+        letter-spacing: 0.8px !important;
+    }
+
+    .card-title {
+        font-size: 1.05rem !important;
+    }
+
+    .card-btn {
+        font-size: 0.72rem !important;
+    }
+}
+
+/* SECTION 4: MOBILE 4 CARDS SINGLE ROW LAYOUT */
+    .socials-section {
+        padding: var(--space-lg) 0 !important;
+    }
+
+    .socials-container {
+        padding: 0 15px !important; /* Mobile par exact 15px side margin */
+        width: 100% !important;
+    }
+
+    .socials-grid {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important; /* Mobile par bi strictly 4 cards ek hi row ma */
+        gap: 6px !important;
+        width: 100% !important;
+    }
+
+    .social-card {
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        padding: 10px 4px !important;
+        gap: 6px !important;
+        border-radius: var(--radius-md) !important;
+    }
+
+    .social-icon-box {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.95rem !important;
+    }
+
+    .social-name {
+        font-size: 0.7rem !important;
+        font-weight: var(--fw-bold) !important;
+    }
+
+    .social-tag {
+        display: none !important; /* Mobile screen fitting ke liye tag text hide kar diya gaya hai */
+    }
+
+    .social-arrow {
+        display: none !important;
+    }
+
+    /* SECTION 5: MOBILE 3 CARDS HORIZONTAL FIT */
+    .process-section {
+        padding: var(--space-lg) 0 !important;
+    }
+
+    .process-container {
+        padding: 0 15px !important;
+        width: 100% !important;
+    }
+
+    .process-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important; /* Mobile par bi 3 cards ek hi row ma */
+        gap: 8px !important;
+        width: 100% !important;
+    }
+
+    .process-card {
+        max-width: 100% !important;
+        height: 220px !important; /* Mobile proportion height adjustment */
+        border-radius: var(--radius-md) !important;
+    }
+
+    .process-image-wrap {
+        height: 110px !important;
+    }
+
+    .process-badge {
+        font-size: 0.55rem !important;
+        padding: 2px 6px !important;
+        top: 6px !important;
+        right: 6px !important;
+    }
+
+    .process-content {
+        padding: 8px 6px !important;
+        gap: 3px !important;
+    }
+
+    .process-title {
+        font-size: 0.75rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .process-desc {
+        font-size: 0.62rem !important;
+        line-height: 1.25 !important;
+    }
+
+    /* SECTION 6: MOBILE COMPACT HORIZONTAL FOOTER */
+    .footer-container {
+        padding: 1.2rem 10px 1rem 10px !important;
+    }
+
+    .footer-grid {
+        display: grid !important;
+        grid-template-columns: 1.3fr 0.85fr 0.85fr !important; /* Mobile par strictly 3 horizontal columns */
+        gap: 6px !important;
+        align-items: start !important;
+    }
+
+    .footer-title {
+        font-size: 0.78rem !important;
+        margin-bottom: 0.3rem !important;
+    }
+
+    .footer-desc {
+        font-size: 0.58rem !important;
+        line-height: 1.25 !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .footer-socials {
+        gap: 4px !important;
+    }
+
+    .social-icon {
+        width: 24px !important;
+        height: 24px !important;
+        font-size: 0.72rem !important;
+        border-radius: 4px !important;
+    }
+
+    .footer-nav {
+        gap: 0.2rem !important;
+    }
+
+    .footer-nav a {
+        font-size: 0.62rem !important;
+    }
+
+    .floating-wa-btn {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 1.2rem !important;
+        right: 10px !important;
+        bottom: 12px !important;
+    }
+
+    .footer-bottom {
+        padding: 0.6rem 10px !important;
+    }
+
+    .footer-bottom p {
+        font-size: 0.68rem !important;
+    }

@@ -1,0 +1,790 @@
+/* ==========================================================================
+   BOLANI WATCHES - MASTER DESIGN SYSTEM & ROOT VARIABLES
+   ========================================================================== */
+
+:root {
+    /* Color Palette (60 - 30 - 10 Rule) */
+    --bg-warm-beige: #E4DDD3;       /* 60% Main Base / Background */
+    --bg-light-beige: #F4EFEA;      /* Light Variant for Cards/Sections */
+    
+    --color-soft-gray: #999A90;     /* 30% Secondary / Borders / Subtext */
+    --color-olive-tint: #84857B;    /* Darker Variant for Muted Text */
+    
+    --primary-navy: #3E4656;        /* 10% Dominant Accent / Buttons / Headers */
+    --primary-navy-dark: #2B313E;   /* Navy Hover State */
+    --primary-navy-light: #525C70;  /* Light Navy Overlay */
+
+    /* Universal Neutral Colors */
+    --color-white: #FFFFFF;
+    --color-black: #121212;
+    --overlay-dark: rgba(30, 35, 45, 0.6);
+    --overlay-light: rgba(228, 221, 211, 0.85);
+
+    /* Typography */
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    /* Font Weights */
+    --fw-light: 300;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extrabold: 800;
+
+    /* Spacing System */
+    --space-xs: 0.5rem;   /* 8px */
+    --space-sm: 1rem;     /* 16px */
+    --space-md: 1.5rem;   /* 24px */
+    --space-lg: 2.5rem;   /* 40px */
+    --space-xl: 4rem;     /* 64px */
+    --space-2xl: 6rem;    /* 96px */
+
+    /* Layout & Containers */
+    --container-max-width: 1280px;
+    --header-height: 80px;
+
+    /* Shadows & Elevation */
+    --shadow-subtle: 0 4px 20px rgba(62, 70, 86, 0.05);
+    --shadow-medium: 0 8px 30px rgba(62, 70, 86, 0.12);
+    --shadow-hover: 0 14px 40px rgba(62, 70, 86, 0.18);
+
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+
+    /* Transitions & Animations */
+    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Global Reset Settings */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-warm-beige);
+    color: var(--primary-navy);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--fw-bold);
+    color: var(--primary-navy);
+    line-height: 1.25;
+}
+
+/*--section 1--*/
+
+/* ==========================================================================
+   HEADER & NAVBAR STYLING (DESKTOP)
+   ========================================================================== */
+
+.main-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background-color: var(--bg-warm-beige);
+    border-bottom: 1px solid var(--color-soft-gray);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-normal);
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1920px;
+    height: 100%;
+    padding: 0 var(--space-lg);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo Styling */
+.brand-logo {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.85rem;
+    font-weight: var(--fw-bold);
+    color: var(--primary-navy);
+    letter-spacing: -0.5px;
+    transition: var(--transition-fast);
+}
+
+.brand-logo:hover .logo-text {
+    color: var(--primary-navy-dark);
+}
+
+/* Navigation Links */
+.nav-menu {
+    display: flex;
+    align-items: center;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 2.2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: var(--fw-semibold);
+    color: var(--primary-navy);
+    position: relative;
+    padding: 6px 0;
+    transition: var(--transition-fast);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-navy);
+    transition: var(--transition-normal);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-navy-dark);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Header Action Buttons */
+.header-actions {
+    display: flex;
+    align-items: center;
+}
+
+/* Desktop WhatsApp Button */
+.whatsapp-btn-desktop {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background-color: var(--primary-navy);
+    color: var(--bg-warm-beige);
+    padding: 0.7rem 1.4rem;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: var(--fw-semibold);
+    box-shadow: var(--shadow-subtle);
+    transition: var(--transition-normal);
+}
+
+.whatsapp-btn-desktop i {
+    font-size: 1.1rem;
+    color: #25D366; /* WhatsApp Signature Green Icon */
+}
+
+.whatsapp-btn-desktop:hover {
+    background-color: var(--primary-navy-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Hide Mobile Button by default on Large Screens */
+.whatsapp-btn-mobile {
+    display: none;
+}
+
+/* ==========================================================================
+   SECTION 2: HERO BANNER STYLING (DESKTOP FIX)
+   ========================================================================== */
+
+.hero-banner-section {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-warm-beige);
+    aspect-ratio: 1920 / 800; /* Responsive aspect ratio for 1920x800 */
+}
+
+.banner-slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* ==========================================================================
+   SECTION 3: COLLECTION SECTION STYLING (DESKTOP)
+   ========================================================================== */
+
+/* ==========================================================================
+   SECTION 3: COLLECTIONS SECTION STYLING (DESKTOP)
+   ========================================================================== */
+
+.collections-section {
+    padding: var(--space-2xl) var(--space-lg);
+    background-color: var(--bg-warm-beige);
+}
+
+.section-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-title-wrap {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: var(--primary-navy);
+    margin-bottom: var(--space-xs);
+    letter-spacing: -0.5px;
+}
+
+.section-subtitle {
+    font-family: var(--font-body);
+    color: var(--color-olive-tint);
+    font-size: 1.05rem;
+    font-weight: var(--fw-medium);
+}
+
+/* 4 Cards Horizontal Grid */
+.collections-grid-wrapper {
+    width: 100%;
+}
+
+.collections-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.8rem;
+    width: 100%;
+}
+
+/* Collection Card Styling */
+.collection-card {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: var(--bg-light-beige);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Initial Drop Shadow Depth */
+    box-shadow: 0 10px 25px rgba(62, 70, 86, 0.08);
+}
+
+/* Image Container & Smooth Zoom Effect */
+.card-image-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+}
+
+.card-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(30, 35, 45, 0.05) 30%, rgba(30, 35, 45, 0.75) 100%);
+    transition: opacity 0.4s ease;
+}
+
+/* Card Content Overlay */
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--space-md);
+    color: var(--color-white);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-tag {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--bg-warm-beige);
+    font-weight: var(--fw-semibold);
+}
+
+.card-title {
+    font-size: 1.4rem;
+    color: var(--color-white);
+    font-family: var(--font-heading);
+}
+
+.card-btn {
+    font-size: 0.85rem;
+    font-weight: var(--fw-semibold);
+    color: var(--bg-warm-beige);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    transition: transform 0.3s ease;
+}
+
+/* Premium Drop Shape Hover Depth Effect */
+.collection-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    /* Multilayered Deep Drop Shadow Effect */
+    box-shadow: 0 20px 40px rgba(30, 35, 45, 0.22), 0 0 20px rgba(153, 154, 144, 0.3);
+}
+
+.collection-card:hover .card-image-wrap img {
+    transform: scale(1.08);
+}
+
+.collection-card:hover .card-btn {
+    transform: translateX(6px);
+}
+
+/* ==========================================================================
+   SECTION 4: SOCIAL CHANNELS STYLING
+   ========================================================================== */
+
+.socials-section {
+    width: 100%;
+    padding: var(--space-2xl) 0;
+    background-color: var(--bg-warm-beige);
+}
+
+.socials-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 15px; /* Exact 15px side margins */
+}
+
+.socials-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+    width: 100%;
+}
+
+/* Base Social Card Styling */
+.social-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1.2rem 1rem;
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    background-color: var(--color-white);
+    border: 1px solid rgba(153, 154, 144, 0.25);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+    box-shadow: 0 6px 18px rgba(62, 70, 86, 0.06);
+    overflow: hidden;
+}
+
+/* Icon Box Base */
+.social-icon-box {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    color: var(--color-white);
+    flex-shrink: 0;
+    transition: transform 0.35s ease;
+}
+
+.social-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+.social-name {
+    font-size: 1.05rem;
+    font-family: var(--font-heading);
+    color: var(--primary-navy);
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.social-tag {
+    font-size: 0.72rem;
+    font-family: var(--font-body);
+    color: var(--color-olive-tint);
+    font-weight: var(--fw-medium);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.social-arrow {
+    font-size: 0.85rem;
+    color: var(--color-soft-gray);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* BRAND SPECIFIC COLORS & HOVER SHADOWS */
+
+/* 1. WhatsApp */
+.whatsapp-card .social-icon-box {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+}
+.whatsapp-card:hover {
+    border-color: #25D366;
+    box-shadow: 0 12px 28px rgba(37, 211, 102, 0.28);
+}
+
+/* 2. Facebook */
+.facebook-card .social-icon-box {
+    background: linear-gradient(135deg, #1877F2, #0056B3);
+}
+.facebook-card:hover {
+    border-color: #1877F2;
+    box-shadow: 0 12px 28px rgba(24, 119, 242, 0.28);
+}
+
+/* 3. Instagram */
+.instagram-card .social-icon-box {
+    background: linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+.instagram-card:hover {
+    border-color: #dc2743;
+    box-shadow: 0 12px 28px rgba(220, 39, 67, 0.28);
+}
+
+/* 4. TikTok */
+.tiktok-card .social-icon-box {
+    background: linear-gradient(135deg, #000000, #25F4EE, #FE2C55);
+}
+.tiktok-card:hover {
+    border-color: #fe2c55;
+    box-shadow: 0 12px 28px rgba(254, 44, 85, 0.25);
+}
+
+/* Universal Hover Motion Effect */
+.social-card:hover {
+    transform: translateY(-6px) scale(1.02);
+}
+
+.social-card:hover .social-icon-box {
+    transform: rotate(8deg) scale(1.08);
+}
+
+.social-card:hover .social-arrow {
+    transform: translate(3px, -3px);
+    color: var(--primary-navy);
+}
+
+/* ==========================================================================
+   SECTION 5: ORDER PROCESS STYLING (DESKTOP)
+   ========================================================================== */
+
+.process-section {
+    width: 100%;
+    padding: var(--space-2xl) 0;
+    background-color: var(--bg-warm-beige);
+}
+
+.process-container {
+    width: 100%;
+    max-width: 1560px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* Process Card (Exact 500px by 350px layout configuration) */
+.process-card {
+    width: 100%;
+    max-width: 500px;
+    height: 350px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid rgba(153, 154, 144, 0.25);
+    box-shadow: 0 8px 24px rgba(62, 70, 86, 0.06);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.process-image-wrap {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.process-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.process-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: var(--primary-navy);
+    color: var(--bg-warm-beige);
+    font-size: 0.75rem;
+    font-weight: var(--fw-bold);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    letter-spacing: 0.5px;
+}
+
+.process-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.process-title {
+    font-size: 1.15rem;
+    font-family: var(--font-heading);
+    color: var(--primary-navy);
+}
+
+.process-desc {
+    font-size: 0.82rem;
+    font-family: var(--font-body);
+    color: var(--color-olive-tint);
+    line-height: 1.45;
+}
+
+/* Card Hover Animation */
+.process-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 36px rgba(62, 70, 86, 0.16);
+}
+
+.process-card:hover .process-image-wrap img {
+    transform: scale(1.06);
+}
+
+.process-image-wrap {
+    position: relative;
+    width: 100%;
+    height: 110px; /* Fix height for mobile stability */
+    background-color: #f0ede6; /* Placeholder color before image loads */
+    overflow: hidden;
+}
+
+
+/* ==========================================================================
+   SECTION 6: FOOTER SECTION STYLING (DESKTOP)
+   ========================================================================== */
+
+.site-footer {
+    width: 100%;
+    background-color: var(--bg-warm-beige); /* Theme warm beige */
+    border-top: 1px solid rgba(153, 154, 144, 0.25);
+    position: relative;
+}
+
+.footer-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2.5rem 15px 2rem 15px;
+    position: relative;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.footer-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: var(--primary-navy);
+    margin-bottom: 0.8rem;
+    font-weight: var(--fw-bold);
+}
+
+.footer-desc {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--color-olive-tint);
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+    max-width: 320px;
+}
+
+/* Social Icons Palette */
+.footer-socials {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.social-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-icon.fb { background-color: #1877F2; }
+.social-icon.insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.social-icon.tiktok { background-color: #000000; }
+.social-icon.wa { background-color: #25D366; }
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+/* Footer Nav Links */
+.footer-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-nav a {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--color-olive-tint);
+    text-decoration: none;
+    transition: color 0.25s ease, padding-left 0.25s ease;
+}
+
+.footer-nav a:hover {
+    color: var(--primary-navy);
+    padding-left: 4px;
+}
+
+/* Floating WhatsApp Button */
+.floating-wa-btn {
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+    width: 52px;
+    height: 52px;
+    background-color: #25D366;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 10;
+}
+
+.floating-wa-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.55);
+}
+
+/* Copyright Bottom Bar */
+.footer-bottom {
+    width: 100%;
+    background-color: #3e4656; /* Dark slate gray background from design */
+    padding: 1rem 15px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: #ffffff;
+    margin: 0;
+}
+
+.footer-bottom span {
+    font-weight: var(--fw-bold);
+    color: var(--bg-warm-beige);
+}
